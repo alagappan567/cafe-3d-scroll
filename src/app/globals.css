@@ -1,0 +1,299 @@
+@import "tailwindcss";
+
+@theme {
+  --color-charcoal:       #1a1a18;
+  --color-charcoal-800:   #232320;
+  --color-charcoal-700:   #2d2d2a;
+  --color-ivory:          #f5f0e8;
+  --color-ivory-400:      #c8c3bb;
+  --color-gold:           #c9a96e;
+  --color-gold-light:     #d4b882;
+  --color-gold-dark:      #a8854f;
+
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-sans:  'Inter', system-ui, -apple-system, sans-serif;
+
+  --tracking-caps: 0.18em;
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: auto;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--color-charcoal);
+  color: var(--color-ivory);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+::-webkit-scrollbar          { width: 3px; }
+::-webkit-scrollbar-track    { background: var(--color-charcoal); }
+::-webkit-scrollbar-thumb    { background: var(--color-gold-dark); border-radius: 2px; }
+
+.grain-overlay {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n' x='0' y='0'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  animation: grain-shift 0.6s steps(2) infinite;
+  will-change: transform;
+}
+
+@keyframes grain-shift {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-2%, -3%); }
+  40%  { transform: translate(3%, 1%); }
+  60%  { transform: translate(-1%, 3%); }
+  80%  { transform: translate(2%, -2%); }
+  100% { transform: translate(-3%, 1%); }
+}
+
+/* ── Cooking scene annotations ─────────────────────────────── */
+.cook-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-gold);
+  box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.7);
+  animation: cook-pulse 2s ease-out infinite;
+  position: relative;
+}
+
+.cook-dot::before,
+.cook-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid rgba(201, 169, 110, 0.5);
+  animation: cook-ring 2s ease-out infinite;
+}
+.cook-dot::after { animation-delay: 0.6s; }
+
+@keyframes cook-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(201, 169, 110, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(201, 169, 110, 0); }
+}
+
+@keyframes cook-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(3.5); opacity: 0; }
+}
+
+@keyframes scene-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes scene-text-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes story-fade-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes preloader-rise {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes preloader-bar {
+  0%   { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.ticker-track {
+  animation: ticker 28s linear infinite;
+  white-space: nowrap;
+  display: inline-flex;
+}
+.ticker-track:hover { animation-play-state: paused; }
+
+.tilt-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.reveal-3d {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+.card-3d-item {
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .grain-overlay { animation: none; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* ── Touch device canvas text scale-up (mobile only, no laptop change) ── */
+@media (pointer: coarse) and (hover: none) {
+  .hero-text-overlay h1 {
+    font-size: clamp(2.8rem, 4.5vw, 5rem) !important;
+  }
+  .hero-subtitle {
+    font-size: 1.1rem !important;
+    max-width: 460px !important;
+  }
+  .hero-btn {
+    padding: 18px 48px !important;
+    font-size: 13px !important;
+  }
+  .cooking-text-overlay h2 {
+    font-size: clamp(2.4rem, 4vw, 4rem) !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .cooking-subtitle {
+    font-size: 1.1rem !important;
+    max-width: 420px !important;
+  }
+  .cooking-scene-panel h3 {
+    font-size: 2rem !important;
+  }
+  .cooking-scene-panel p {
+    font-size: 0.95rem !important;
+  }
+}
+
+/* ── Mobile responsive ─────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Hero canvas text overlay */
+  .hero-text-overlay {
+    padding-left: 6vw !important;
+    padding-right: 6vw !important;
+    padding-top: 0 !important;
+    justify-content: flex-end !important;
+    padding-bottom: 100px !important;
+  }
+  .hero-text-overlay h1 {
+    font-size: clamp(1.6rem, 7vw, 2.2rem) !important;
+  }
+
+  /* Story panels: full width at bottom */
+  .story-panel {
+    left: 5vw !important;
+    right: 5vw !important;
+    max-width: 100% !important;
+    bottom: 8% !important;
+  }
+
+  /* Cooking canvas text overlay */
+  .cooking-text-overlay {
+    padding-left: 5vw !important;
+    padding-right: 5vw !important;
+    padding-top: 0 !important;
+    justify-content: flex-end !important;
+    padding-bottom: 100px !important;
+  }
+  .cooking-text-overlay h2 {
+    font-size: 1.5rem !important;
+  }
+
+  /* Cooking scene annotation */
+  .cooking-scene-panel {
+    left: 4% !important;
+    right: 4% !important;
+    width: auto !important;
+    max-width: none !important;
+    top: auto !important;
+    bottom: 20% !important;
+  }
+
+  /* Bento cards: single column, flat */
+  .bento-cards-grid {
+    grid-template-columns: 1fr !important;
+    height: auto !important;
+    gap: 12px !important;
+  }
+  .bento-card-item {
+    height: 300px !important;
+    transform: none !important;
+    border-radius: 12px !important;
+  }
+
+  /* Idea Behind EMBER: stack */
+  .ember-idea-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .ember-idea-grid .ember-idea-image {
+    min-height: 280px !important;
+  }
+  .ember-idea-grid .ember-idea-image svg {
+    display: none !important;
+  }
+
+  /* Plan Your Visit: reduce padding */
+  .plan-visit-section {
+    padding: 56px 24px !important;
+  }
+  .plan-visit-section .plan-cols {
+    gap: 40px !important;
+  }
+
+  /* Expanding gallery: horizontal scroll */
+  .expanding-gallery-wrap {
+    height: 240px !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    flex-wrap: nowrap !important;
+    padding: 0 16px !important;
+    -webkit-overflow-scrolling: touch !important;
+    scrollbar-width: none !important;
+  }
+  .expanding-gallery-wrap::-webkit-scrollbar { display: none; }
+  .expanding-gallery-wrap > div {
+    flex: 0 0 160px !important;
+    min-width: 160px !important;
+    transition: none !important;
+  }
+
+  /* Space marquee: smaller cards */
+  .space-marquee-track .space-card {
+    width: 200px !important;
+    height: 240px !important;
+  }
+
+  /* Cocktails: reduce image height */
+  .cocktail-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+  }
+
+  /* Reserve Your Table */
+  .reserve-heading {
+    font-size: clamp(1.8rem, 8vw, 2.8rem) !important;
+  }
+
+  /* Ticker font size */
+  .ticker-track span {
+    font-size: 8px !important;
+    padding-right: 40px !important;
+  }
+}
