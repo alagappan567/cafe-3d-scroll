@@ -115,8 +115,6 @@ export default function NightlifeBento() {
           {/* Label — always visible */}
           <span style={{
             position: "absolute",
-            bottom: hovered === i ? "auto" : 16,
-            top: hovered === i ? "auto" : "auto",
             left: 16,
             color: "#fff",
             fontFamily: "var(--font-sans)",

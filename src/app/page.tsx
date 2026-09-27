@@ -10,36 +10,36 @@ import AboutStats from "@/components/AboutStats";
 
 const FEATURE_CARDS = [
   {
-    label: "Infinity Pool",
-    title: "Pool Deck\nat Sea",
-    desc: "Swim above the horizon — our open-air infinity pools offer panoramic ocean views from every angle.",
-    img: "/ship%20models/45f5b7ba025092b8c84639f14405bd4c.jpg",
-    price: "From $1,299",
-    priceNote: "Per person / 7 nights",
+    label: "Craft Drinks",
+    title: "Handcrafted\nCocktails",
+    desc: "Award-winning mixologists craft every drink with precision — served poolside, at the bar, or in your suite.",
+    img: "/designed%20for%20better%20experinece/IMG_8019.JPG.jpeg",
+    price: "Included",
+    priceNote: "All drinks on board",
   },
   {
     label: "Fine Dining",
     title: "World-Class\nCuisine",
     desc: "Five-star menus crafted by award-winning chefs — served with the ocean as your backdrop, every night.",
-    img: "/ship%20models/a9d5ba8d2cdabd4fa7f5b541387b4c67.jpg",
+    img: "/designed%20for%20better%20experinece/IMG_8020.JPG.jpeg",
     price: "Included",
     priceNote: "All dining on board",
+  },
+  {
+    label: "Chef's Table",
+    title: "The Kitchen\nExperience",
+    desc: "An intimate dining experience — watch our executive chef craft each course right before your eyes.",
+    img: "/designed%20for%20better%20experinece/IMG_8044.JPG.jpeg",
+    price: "From $120",
+    priceNote: "Per person",
   },
   {
     label: "Nightlife",
     title: "Nights That\nNever End",
     desc: "Rooftop bars, live DJ sets, open-air dancing and handcrafted cocktails under a canopy of stars.",
-    img: "/ship%20models/d8c6ed0956126370c4c524f03720ffd6.jpg",
+    img: "/designed%20for%20better%20experinece/IMG_8036.JPG.jpeg",
     price: "Included",
     priceNote: "All entertainment",
-  },
-  {
-    label: "Luxury Cabins",
-    title: "Your Suite\nAt Sea",
-    desc: "Ocean-view suites designed for rest and indulgence — private balconies, premium linens, 24-hr service.",
-    img: "/ship%20models/4cff0bc2fa0aee808326890d3dff78a3.jpg",
-    price: "Suite Upgrade",
-    priceNote: "From $400 / night",
   },
 ];
 
@@ -257,12 +257,6 @@ export default function Home() {
           </div>
         </div>
 
-        <style>{`
-          @keyframes dining-scroll-left {
-            0%   { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-        `}</style>
       </section>
 
       {/* ── Nightlife Experience — Bento Grid ───────────────────────── */}
@@ -332,7 +326,7 @@ export default function Home() {
         {/* Big CTA card */}
         <div style={{ position: "relative", borderRadius: "24px", overflow: "hidden", height: "440px", marginTop: "40px" }}>
           <img
-            src="/designed%20for%20better%20experinece/2c94fa773b4e02d052f067666bb68e33.jpg"
+            src="/designed%20for%20better%20experinece/IMG_8041.JPG.jpeg"
             alt="Ship"
             style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 70%" }}
           />

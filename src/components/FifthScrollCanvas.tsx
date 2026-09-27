@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const TOTAL_FRAMES = 300;
 const FRAME_PATH = (n: number) =>
-  `/fifith%20scroll%20section/ezgif-frame-${String(n).padStart(3, "0")}.jpg`;
+  `/hero%20section%20scroll/ezgif-frame-${String(n).padStart(3, "0")}.jpg`;
 
 const STORY_SCENES = [
   {

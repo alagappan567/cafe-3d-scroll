@@ -14,7 +14,7 @@ export default function BentoSection() {
   const centerRef = useRef<HTMLDivElement>(null);
   const rightRef = useRef<HTMLDivElement>(null);
 
-  function enter(ref: React.RefObject<HTMLDivElement>, toY: number) {
+  function enter(ref: React.RefObject<HTMLDivElement | null>, toY: number) {
     gsap.to(ref.current, {
       rotateY: toY,
       rotateX: 0,
@@ -26,7 +26,7 @@ export default function BentoSection() {
     });
   }
 
-  function leave(ref: React.RefObject<HTMLDivElement>, initialY: number) {
+  function leave(ref: React.RefObject<HTMLDivElement | null>, initialY: number) {
     gsap.to(ref.current, {
       rotateY: initialY,
       rotateX: 0,
